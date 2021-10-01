@@ -20,7 +20,23 @@ app.get('/login', (req, res) => {
 })
 
 app.post('/login', (req, res) => {
-    res.send(req.body);
+    const {username,password} =req.body;
+    
+    const hashPwd= sha(password);
+    
+    User.find({ name:username }, function (err, docs) {
+    if (err){
+        console.log(err);
+    }
+    else{
+          if(hashpwd!=docs.password)
+          {
+              
+              res.redirect("/login");
+           
+              
+    }
+});
 })
 
 app.get('/register', (req, res) => {
